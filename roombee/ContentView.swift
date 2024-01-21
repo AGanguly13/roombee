@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var ourPurple = hexStringToUIColor(hex: "#381e38")
-    var body: some View {
-        ZStack{
-            Color(ourPurple).ignoresSafeArea()
-            VStack {
-                Text("Roombee").font(.largeTitle).bold().foregroundColor(.yellow)
-            }
-            .padding()
-        }
-    }
-}
-
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -41,6 +28,38 @@ func hexStringToUIColor (hex:String) -> UIColor {
         alpha: CGFloat(1.0)
     )
 }
+
+struct ContentView: View {
+    @State private var imageOpacity: Double = 0.0
+    var ourPurple = hexStringToUIColor(hex: "#381e38")
+    var body: some View {
+        NavigationView {
+            NavigationLink {
+                SignUp()
+            } label: {
+                ZStack{
+                    Color(ourPurple).ignoresSafeArea()
+                    
+                    VStack {
+                        Image("Roombee")
+                            .resizable()
+                            .frame(width: 300, height: 300)
+                            .opacity(imageOpacity)
+                            .offset(x: 10)
+                            .onAppear() {
+                                withAnimation(Animation.easeIn(duration: 2.0)) {
+                                    imageOpacity = 1.0
+                                }
+                                
+                            }
+                            .padding()
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -60,8 +60,7 @@ struct StatusView: View {
                 }.padding(.leading, 10).padding(.trailing, 10)
             }
         }
-        
-        
+        .navigationBarBackButtonHidden(true)
         
     }
 }
